@@ -39,7 +39,7 @@
     left: 0;
     width: 100%;
     z-index: 50;
-  }
+   }
    @keyframes fadeSlideIn {
     to {
      opacity: 1;
@@ -48,7 +48,7 @@
    }
   </style>
  </head>
- <body class="bg-white text-gray-900">
+ <body class="bg-white text-gray-900 relative">
   <div id="nameAnimation" class="name-container">Akshay Gangwar</div>
 
   <div class="max-w-7xl mx-auto p-6 md:p-10">
@@ -223,6 +223,17 @@
         </li>
        </ul>
       </article>
+      <article class="mb-6">
+       <div class="flex justify-between font-semibold mb-1">
+        <h3 class="font-bold text-base">Voltas</h3>
+        <span class="text-sm">I.d.o Line Quality Check Department</span>
+       </div>
+       <p class="mb-1 font-semibold">Experience in Line Quality Check</p>
+       <p>
+        Worked in the I.d.o Line Quality Check Department at Voltas, ensuring
+        product quality and adherence to standards.
+       </p>
+      </article>
       <article>
        <div class="flex justify-between font-semibold mb-1">
         <h3 class="font-bold text-base">Projects</h3>
@@ -280,6 +291,16 @@
    </div>
   </div>
 
+  <!-- Visitor Counter -->
+  <div
+   id="visitorCounter"
+   class="fixed bottom-4 right-4 bg-[#374151] text-white rounded-full px-4 py-2 flex items-center space-x-2 shadow-lg cursor-default select-none z-50"
+   title="Visitor Count"
+  >
+   <i class="fas fa-users"></i>
+   <span id="visitorCount" class="font-semibold">0</span>
+  </div>
+
   <script>
    // Remove the animation div after 3 seconds
    setTimeout(() => {
@@ -292,6 +313,18 @@
      }, 500);
     }
    }, 3000);
+
+   // Visitor counter using localStorage
+   (function () {
+    const countEl = document.getElementById("visitorCount");
+    if (!countEl) return;
+
+    // Get current count from localStorage or start at 0
+    let count = parseInt(localStorage.getItem("visitorCount")) || 0;
+    count++;
+    localStorage.setItem("visitorCount", count);
+    countEl.textContent = count.toLocaleString();
+   })();
   </script>
  </body>
 </html>

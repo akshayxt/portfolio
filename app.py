@@ -8,6 +8,12 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    return "Backend is live!"
+
+
+
 # MongoDB connection
 MONGO_URI = "mongodb+srv://Portfolio_Raxx:Portfolio_Raxx@cluster0.yp55tz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())

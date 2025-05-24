@@ -8,23 +8,21 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
-def home():
-    return "Backend is live!"
-
 
 
 # MongoDB connection
 MONGO_URI = "mongodb+srv://Portfolio_Raxx:Portfolio_Raxx@cluster0.yp55tz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 
-try:
-    mongo_uri = os.environ.get("MONGO_URI")
-    client = MongoClient(mongo_uri)
-    db = client["portfolio_db"]
-    print("MongoDB connected successfully!")
-except Exception as e:
-    print("MongoDB connection error:", e)
+
+
+
+app = Flask(__name__)
+CORS(app)
+
+# Mongo connection
+
+
 
 # Select the database and collection
 db = client["PortfolioDB"]  # You can name this anything
@@ -54,13 +52,25 @@ def contact():
     except Exception as e:
         print("MongoDB Insertion Error:", e)
         return jsonify({"message": "Failed to save data"}), 500
+    
+
+try:
+    mongo_uri = os.environ.get("MONGO_URI")
+    client = MongoClient(mongo_uri)
+    db = client["portfolio_db"]
+    print("🎉🎉🎉MongoDB connected!🎉🎉🎉")
+except Exception as e:
+    print("😔😔😔MongoDB connection failed:😔😔😔", e)
+
 
 # Serve the HTML page
 @app.route('/')
 def index():
-    return render_template('index.html')  # templates/index.html must exist
+    
 
+    return render_template('index.html')  
 
+    
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)

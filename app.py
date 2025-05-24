@@ -18,6 +18,14 @@ def home():
 MONGO_URI = "mongodb+srv://Portfolio_Raxx:Portfolio_Raxx@cluster0.yp55tz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 
+try:
+    mongo_uri = os.environ.get("MONGO_URI")
+    client = MongoClient(mongo_uri)
+    db = client["portfolio_db"]
+    print("MongoDB connected successfully!")
+except Exception as e:
+    print("MongoDB connection error:", e)
+
 # Select the database and collection
 db = client["PortfolioDB"]  # You can name this anything
 collection = db["Contacts"]
